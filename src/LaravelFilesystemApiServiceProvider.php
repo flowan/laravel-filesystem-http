@@ -2,9 +2,9 @@
 
 namespace Flowan\LaravelFilesystemApi;
 
+use Flowan\LaravelFilesystemApi\Commands\LaravelFilesystemApiCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Flowan\LaravelFilesystemApi\Commands\LaravelFilesystemApiCommand;
 
 class LaravelFilesystemApiServiceProvider extends PackageServiceProvider
 {
