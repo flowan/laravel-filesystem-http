@@ -93,7 +93,7 @@ class ApiAdapter implements FilesystemAdapter
     }
 
     /**
-     * @param resource $contents
+     * @param  resource  $contents
      *
      * @throws UnableToWriteFile
      * @throws FilesystemException
