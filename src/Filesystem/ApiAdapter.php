@@ -22,7 +22,7 @@ use League\Flysystem\UnableToWriteFile;
 
 class ApiAdapter implements FilesystemAdapter
 {
-    protected  $client;
+    protected $client;
 
     public function __construct(
         protected array $config
@@ -80,7 +80,7 @@ class ApiAdapter implements FilesystemAdapter
     }
 
     /**
-     * @param resource $contents
+     * @param  resource  $contents
      *
      * @throws UnableToWriteFile
      * @throws FilesystemException
