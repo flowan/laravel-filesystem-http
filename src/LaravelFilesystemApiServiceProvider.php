@@ -2,7 +2,6 @@
 
 namespace Flowan\LaravelFilesystemApi;
 
-use Flowan\LaravelFilesystemApi\Commands\LaravelFilesystemApiCommand;
 use Flowan\LaravelFilesystemApi\Filesystem\ApiAdapter;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Filesystem\FilesystemAdapter;
@@ -23,9 +22,6 @@ class LaravelFilesystemApiServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-filesystem-api')
             ->hasConfigFile();
-//            ->hasViews()
-//            ->hasMigration('create_laravel-filesystem-api_table')
-//            ->hasCommand(LaravelFilesystemApiCommand::class);
     }
 
     public function packageBooted(): void

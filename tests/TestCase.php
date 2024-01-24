@@ -2,9 +2,9 @@
 
 namespace Flowan\LaravelFilesystemApi\Tests;
 
+use Flowan\LaravelFilesystemApi\LaravelFilesystemApiServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Flowan\LaravelFilesystemApi\LaravelFilesystemApiServiceProvider;
 
 class TestCase extends Orchestra
 {
