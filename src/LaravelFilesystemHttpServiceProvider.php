@@ -37,8 +37,8 @@ class LaravelFilesystemHttpServiceProvider extends PackageServiceProvider
         });
 
         Storage::macro('bucket', function (string $bucket) {
-            /** @var FilesystemAdapter $this **/
-            /** @var HttpAdapter $adapter **/
+            /** @var FilesystemAdapter $this * */
+            /** @var HttpAdapter $adapter * */
             $adapter = $this->getAdapter();
 
             $adapter->setBucket($bucket);
