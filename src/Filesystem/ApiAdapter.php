@@ -22,7 +22,9 @@ use League\Flysystem\UnableToWriteFile;
 
 class ApiAdapter implements FilesystemAdapter
 {
-    protected  $client;
+    protected $client;
+
+    protected string $bucket = 'public';
 
     public function __construct(
         protected array $config
@@ -31,6 +33,10 @@ class ApiAdapter implements FilesystemAdapter
             $this->config['username'],
             $this->config['password']
         )->baseUrl($this->config['url'].'/api/');
+
+        if (! empty($this->config['bucket'])) {
+            $this->setBucket($this->config['bucket']);
+        }
     }
 
     /**
@@ -40,7 +46,10 @@ class ApiAdapter implements FilesystemAdapter
     public function fileExists(string $path): bool
     {
         try {
-            return $this->client->post('file/exists', ['path' => $path])->object()->exists;
+            return $this->client->post('file/exists', [
+                'bucket' => $this->bucket,
+                'path' => $path,
+            ])->object()->exists;
         } catch (\Throwable $exception) {
             throw UnableToCheckFileExistence::forLocation($path, $exception);
         }
@@ -53,7 +62,10 @@ class ApiAdapter implements FilesystemAdapter
     public function directoryExists(string $path): bool
     {
         try {
-            return $this->client->post('directory/exists', ['path' => $path])->object()->exists;
+            return $this->client->post('directory/exists', [
+                'bucket' => $this->bucket,
+                'path' => $path,
+            ])->object()->exists;
         } catch (\Throwable $exception) {
             throw UnableToCheckExistence::forLocation($path, $exception);
         }
@@ -67,6 +79,7 @@ class ApiAdapter implements FilesystemAdapter
     {
         try {
             $response = $this->client->post('file', [
+                'bucket' => $this->bucket,
                 'path' => $path,
                 'contents' => $contents,
             ]);
@@ -98,6 +111,7 @@ class ApiAdapter implements FilesystemAdapter
     {
         try {
             $response = $this->client->get('file', [
+                'bucket' => $this->bucket,
                 'path' => $path,
             ]);
 
@@ -130,6 +144,7 @@ class ApiAdapter implements FilesystemAdapter
     {
         try {
             $response = $this->client->delete('file', [
+                'bucket' => $this->bucket,
                 'path' => $path,
             ]);
 
@@ -204,6 +219,7 @@ class ApiAdapter implements FilesystemAdapter
         try {
             // TODO move this to a separate method and cache the result for the current request (once) ?
             $response = $this->client->get('file/meta', [
+                'bucket' => $this->bucket,
                 'path' => $path,
             ]);
 
@@ -246,5 +262,10 @@ class ApiAdapter implements FilesystemAdapter
     public function copy(string $source, string $destination, Config $config): void
     {
         // TODO implement
+    }
+
+    public function setBucket(string $bucket)
+    {
+        $this->bucket = $bucket;
     }
 }

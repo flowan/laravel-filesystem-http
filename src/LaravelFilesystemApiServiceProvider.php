@@ -35,5 +35,11 @@ class LaravelFilesystemApiServiceProvider extends PackageServiceProvider
                 $config
             );
         });
+
+        Storage::macro('bucket', function (string $bucket) {
+            $this->adapter->setBucket($bucket);
+
+            return $this;
+        });
     }
 }
