@@ -164,7 +164,18 @@ class HttpAdapter implements FilesystemAdapter
      */
     public function deleteDirectory(string $path): void
     {
-        // TODO implement
+        try {
+            $response = $this->client->delete('directory', [
+                'bucket' => $this->bucket,
+                'path' => $path,
+            ]);
+
+            if ($response->status() !== 200) {
+                throw UnableToDeleteDirectory::atLocation($path, 'Directory could not be deleted');
+            }
+        } catch (\Throwable $exception) {
+            throw UnableToDeleteDirectory::atLocation($path, '', $exception);
+        }
     }
 
     /**
@@ -173,7 +184,18 @@ class HttpAdapter implements FilesystemAdapter
      */
     public function createDirectory(string $path, Config $config): void
     {
-        // TODO implement
+        try {
+            $response = $this->client->post('directory', [
+                'bucket' => $this->bucket,
+                'path' => $path,
+            ]);
+
+            if ($response->status() !== 200) {
+                throw UnableToCreateDirectory::atLocation($path, $response->body());
+            }
+        } catch (\Throwable $exception) {
+            throw UnableToCreateDirectory::atLocation($path, $exception->getMessage());
+        }
     }
 
     /**
@@ -191,16 +213,24 @@ class HttpAdapter implements FilesystemAdapter
      */
     public function visibility(string $path): FileAttributes
     {
-        // TODO implement
+        try {
+            $meta = $this->getMeta($path);
 
-        return new FileAttributes(
-            '',
-            null,
-            null,
-            null,
-            null,
-            [],
-        );
+            if ($meta instanceof \Throwable) {
+                throw $meta;
+            }
+
+            return new FileAttributes(
+                $path,
+                null,
+                $meta->visibility,
+                null,
+                null,
+                [],
+            );
+        } catch (\Throwable $exception) {
+            throw UnableToRetrieveMetadata::visibility($path);
+        }
     }
 
     /**
@@ -209,16 +239,24 @@ class HttpAdapter implements FilesystemAdapter
      */
     public function mimeType(string $path): FileAttributes
     {
-        // TODO implement
+        try {
+            $meta = $this->getMeta($path);
 
-        return new FileAttributes(
-            '',
-            null,
-            null,
-            null,
-            null,
-            [],
-        );
+            if ($meta instanceof \Throwable) {
+                throw $meta;
+            }
+
+            return new FileAttributes(
+                $path,
+                null,
+                null,
+                null,
+                $meta->mime_type,
+                [],
+            );
+        } catch (\Throwable $exception) {
+            throw UnableToRetrieveMetadata::mimeType($path);
+        }
     }
 
     /**
@@ -227,16 +265,24 @@ class HttpAdapter implements FilesystemAdapter
      */
     public function lastModified(string $path): FileAttributes
     {
-        // TODO implement
+        try {
+            $meta = $this->getMeta($path);
 
-        return new FileAttributes(
-            '',
-            null,
-            null,
-            null,
-            null,
-            [],
-        );
+            if ($meta instanceof \Throwable) {
+                throw $meta;
+            }
+
+            return new FileAttributes(
+                $path,
+                null,
+                null,
+                $meta->last_modified,
+                null,
+                [],
+            );
+        } catch (\Throwable $exception) {
+            throw UnableToRetrieveMetadata::lastModified($path);
+        }
     }
 
     /**
@@ -246,15 +292,15 @@ class HttpAdapter implements FilesystemAdapter
     public function fileSize(string $path): FileAttributes
     {
         try {
-            // TODO move this to a separate method and cache the result for the current request (once) ?
-            $response = $this->client->get('file/meta', [
-                'bucket' => $this->bucket,
-                'path' => $path,
-            ]);
+            $meta = $this->getMeta($path);
+
+            if ($meta instanceof \Throwable) {
+                throw $meta;
+            }
 
             return new FileAttributes(
                 $path,
-                $response->object()->meta->size,
+                $meta->size,
                 null,
                 null,
                 null,
@@ -298,5 +344,19 @@ class HttpAdapter implements FilesystemAdapter
     public function setBucket(string $bucket)
     {
         $this->bucket = $bucket;
+    }
+
+    protected function getMeta(string $path)
+    {
+        try {
+            $response = $this->client->post('file/meta', [
+                'bucket' => $this->bucket,
+                'path' => $path,
+            ]);
+
+            return $response->object()->meta;
+        } catch (\Throwable $exception) {
+            return $exception;
+        }
     }
 }
