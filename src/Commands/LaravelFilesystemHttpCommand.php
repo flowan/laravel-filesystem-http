@@ -1,12 +1,12 @@
 <?php
 
-namespace Flowan\LaravelFilesystemApi\Commands;
+namespace Flowan\LaravelFilesystemHttp\Commands;
 
 use Illuminate\Console\Command;
 
-class LaravelFilesystemApiCommand extends Command
+class LaravelFilesystemHttpCommand extends Command
 {
-    public $signature = 'laravel-filesystem-api';
+    public $signature = 'laravel-filesystem-http';
 
     public $description = 'My command';
 

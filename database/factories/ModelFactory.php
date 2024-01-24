@@ -1,6 +1,6 @@
 <?php
 
-namespace Flowan\LaravelFilesystemApi\Database\Factories;
+namespace Flowan\LaravelFilesystemHttp\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

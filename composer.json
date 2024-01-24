@@ -1,11 +1,11 @@
 {
-    "name": "flowan/laravel-filesystem-api",
-    "description": "Laravel filesystem api adapter",
+    "name": "flowan/laravel-filesystem-http",
+    "description": "Laravel filesystem http adapter",
     "keywords": [
         "laravel",
-        "laravel-filesystem-api"
+        "laravel-filesystem-http"
     ],
-    "homepage": "https://github.com/flowan/laravel-filesystem-api",
+    "homepage": "https://github.com/flowan/laravel-filesystem-http",
     "license": "MIT",
     "authors": [
         {
@@ -34,19 +34,19 @@
     },
     "autoload": {
         "psr-4": {
-            "Flowan\\LaravelFilesystemApi\\": "src/",
-            "Flowan\\LaravelFilesystemApi\\Database\\Factories\\": "database/factories/"
+            "Flowan\\LaravelFilesystemHttp\\": "src/",
+            "Flowan\\LaravelFilesystemHttp\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Flowan\\LaravelFilesystemApi\\Tests\\": "tests/",
+            "Flowan\\LaravelFilesystemHttp\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
     "scripts": {
         "post-autoload-dump": "@composer run prepare",
-        "clear": "@php vendor/bin/testbench package:purge-laravel-filesystem-api --ansi",
+        "clear": "@php vendor/bin/testbench package:purge-laravel-filesystem-http --ansi",
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "build": [
             "@composer run prepare",
@@ -72,10 +72,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Flowan\\LaravelFilesystemApi\\LaravelFilesystemApiServiceProvider"
+                "Flowan\\LaravelFilesystemHttp\\LaravelFilesystemHttpServiceProvider"
             ],
             "aliases": {
-                "LaravelFilesystemApi": "Flowan\\LaravelFilesystemApi\\Facades\\LaravelFilesystemApi"
+                "LaravelFilesystemHttp": "Flowan\\LaravelFilesystemHttp\\Facades\\LaravelFilesystemHttp"
             }
         }
     },

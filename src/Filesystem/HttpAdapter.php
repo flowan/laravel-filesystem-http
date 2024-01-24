@@ -1,6 +1,6 @@
 <?php
 
-namespace Flowan\LaravelFilesystemApi\Filesystem;
+namespace Flowan\LaravelFilesystemHttp\Filesystem;
 
 use Illuminate\Support\Facades\Http;
 use League\Flysystem\Config;
@@ -20,7 +20,7 @@ use League\Flysystem\UnableToReadFile;
 use League\Flysystem\UnableToRetrieveMetadata;
 use League\Flysystem\UnableToWriteFile;
 
-class ApiAdapter implements FilesystemAdapter
+class HttpAdapter implements FilesystemAdapter
 {
     protected $client;
 

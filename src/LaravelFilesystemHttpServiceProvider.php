@@ -1,8 +1,8 @@
 <?php
 
-namespace Flowan\LaravelFilesystemApi;
+namespace Flowan\LaravelFilesystemHttp;
 
-use Flowan\LaravelFilesystemApi\Filesystem\ApiAdapter;
+use Flowan\LaravelFilesystemHttp\Filesystem\HttpAdapter;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Facades\Storage;
@@ -10,7 +10,7 @@ use League\Flysystem\Filesystem;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class LaravelFilesystemApiServiceProvider extends PackageServiceProvider
+class LaravelFilesystemHttpServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -20,14 +20,14 @@ class LaravelFilesystemApiServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('laravel-filesystem-api')
+            ->name('laravel-filesystem-http')
             ->hasConfigFile();
     }
 
     public function packageBooted(): void
     {
-        Storage::extend('api', function (Application $app, array $config) {
-            $adapter = new ApiAdapter($config);
+        Storage::extend('http', function (Application $app, array $config) {
+            $adapter = new HttpAdapter($config);
 
             return new FilesystemAdapter(
                 new Filesystem($adapter, $config),
@@ -37,7 +37,8 @@ class LaravelFilesystemApiServiceProvider extends PackageServiceProvider
         });
 
         Storage::macro('bucket', function (string $bucket) {
-            $this->adapter->setBucket($bucket);
+            /** @var FilesystemAdapter $this **/
+            $this->getAdapter()->setBucket($bucket);
 
             return $this;
         });

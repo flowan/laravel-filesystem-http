@@ -1,8 +1,8 @@
 <?php
 
-namespace Flowan\LaravelFilesystemApi\Tests;
+namespace Flowan\LaravelFilesystemHttp\Tests;
 
-use Flowan\LaravelFilesystemApi\LaravelFilesystemApiServiceProvider;
+use Flowan\LaravelFilesystemHttp\LaravelFilesystemHttpServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 
@@ -13,14 +13,14 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Flowan\\LaravelFilesystemApi\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Flowan\\LaravelFilesystemHttp\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            LaravelFilesystemApiServiceProvider::class,
+            LaravelFilesystemHttpServiceProvider::class,
         ];
     }
 
@@ -29,7 +29,7 @@ class TestCase extends Orchestra
         config()->set('database.default', 'testing');
 
         /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-filesystem-api_table.php.stub';
+        $migration = include __DIR__.'/../database/migrations/create_laravel-filesystem-http_table.php.stub';
         $migration->up();
         */
     }

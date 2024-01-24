@@ -1,5 +1,5 @@
 <?php
 
-use Flowan\LaravelFilesystemApi\Tests\TestCase;
+use Flowan\LaravelFilesystemHttp\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);
