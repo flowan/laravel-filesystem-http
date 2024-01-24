@@ -134,6 +134,8 @@ class HttpAdapter implements FilesystemAdapter
     public function readStream(string $path)
     {
         // TODO implement
+
+        return fopen('php://temp', 'r+');
     }
 
     /**
@@ -190,6 +192,15 @@ class HttpAdapter implements FilesystemAdapter
     public function visibility(string $path): FileAttributes
     {
         // TODO implement
+
+        return new FileAttributes(
+            '',
+            null,
+            null,
+            null,
+            null,
+            [],
+        );
     }
 
     /**
@@ -199,6 +210,15 @@ class HttpAdapter implements FilesystemAdapter
     public function mimeType(string $path): FileAttributes
     {
         // TODO implement
+
+        return new FileAttributes(
+            '',
+            null,
+            null,
+            null,
+            null,
+            [],
+        );
     }
 
     /**
@@ -208,6 +228,15 @@ class HttpAdapter implements FilesystemAdapter
     public function lastModified(string $path): FileAttributes
     {
         // TODO implement
+
+        return new FileAttributes(
+            '',
+            null,
+            null,
+            null,
+            null,
+            [],
+        );
     }
 
     /**
@@ -244,6 +273,8 @@ class HttpAdapter implements FilesystemAdapter
     public function listContents(string $path, bool $deep): iterable
     {
         // TODO implement
+
+        return [];
     }
 
     /**
