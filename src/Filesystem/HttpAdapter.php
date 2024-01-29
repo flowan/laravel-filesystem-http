@@ -307,7 +307,7 @@ class HttpAdapter implements FilesystemAdapter
         $url = trim($this->config['public_url'] ?? $this->config['url'], '/');
         $path = trim($path, '/');
 
-        $includeBucketInUrl = ! empty($this->config['include_bucket_in_url']) ? $this->config['include_bucket_in_url'] : true;
+        $includeBucketInUrl = isset($this->config['include_bucket_in_url']) ? (bool) $this->config['include_bucket_in_url'] : true;
         $bucket = $this->bucket && $includeBucketInUrl ? $this->bucket.'/' : '';
 
         return sprintf('%s/%s%s', $url, $bucket, $path);
