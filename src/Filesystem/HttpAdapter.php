@@ -34,10 +34,13 @@ class HttpAdapter implements FilesystemAdapter
             new \Exception('Missing disk url in filesystem config')
         );
 
-        $this->client = Http::withBasicAuth(
-            $this->config['username'],
-            $this->config['password']
-        )->baseUrl($this->config['url'].'/api/');
+        throw_if(
+            ! isset($this->config['token']),
+            new \Exception('Missing token in filesystem config')
+        );
+
+        $this->client = Http::withToken($this->config['token'])
+            ->baseUrl($this->config['url'].'/api/');
 
         if (! empty($this->config['bucket'])) {
             $this->setBucket($this->config['bucket']);
