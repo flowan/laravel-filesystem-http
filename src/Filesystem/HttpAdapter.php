@@ -307,7 +307,19 @@ class HttpAdapter implements FilesystemAdapter
      */
     public function move(string $source, string $destination, Config $config): void
     {
-        // TODO implement
+        try {
+            $response = $this->client->post('file/move', [
+                'bucket' => $this->bucket,
+                'source' => $source,
+                'destination' => $destination,
+            ]);
+
+            if ($response->status() !== 200 || $response->object()->moved !== true) {
+                throw new \Exception('File could not be moved');
+            }
+        } catch (\Throwable $exception) {
+            throw UnableToMoveFile::fromLocationTo($source, $destination, $exception);
+        }
     }
 
     /**
