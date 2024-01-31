@@ -1,6 +1,6 @@
 {
     "name": "flowan/laravel-filesystem-http",
-    "description": "Laravel filesystem http adapter",
+    "description": "Filesystem HTTP Adapter for Laravel",
     "keywords": [
         "laravel",
         "laravel-filesystem-http"

@@ -282,9 +282,23 @@ class HttpAdapter implements FilesystemAdapter
      */
     public function listContents(string $path, bool $deep): iterable
     {
-        // TODO implement
+        try {
+            $response = $this->client->post('directory/files', [
+                'bucket' => $this->bucket,
+                'path' => $path,
+                'recursive' => $deep,
+            ]);
 
-        return [];
+            if ($response->status() !== 200) {
+                throw new \Exception('Directory could not be listed');
+            }
+        } catch (\Throwable $exception) {
+            throw new \Exception($exception->getMessage());
+        }
+
+        foreach ($response->object()->files as $file) {
+            yield new FileAttributes($file);
+        }
     }
 
     /**
