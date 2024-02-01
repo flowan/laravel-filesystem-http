@@ -328,7 +328,19 @@ class HttpAdapter implements FilesystemAdapter
      */
     public function copy(string $source, string $destination, Config $config): void
     {
-        // TODO implement
+        try {
+            $response = $this->client->post('file/copy', [
+                'bucket' => $this->bucket,
+                'source' => $source,
+                'destination' => $destination,
+            ]);
+
+            if ($response->status() !== 200 || $response->object()->copied !== true) {
+                throw new \Exception('File could not be copied');
+            }
+        } catch (\Throwable $exception) {
+            throw UnableToCopyFile::fromLocationTo($source, $destination, $exception);
+        }
     }
 
     public function getUrl(string $path): string
