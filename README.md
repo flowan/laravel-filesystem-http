@@ -40,15 +40,18 @@ return [
 ];
 ```
 
+And add the following to your `.env` file:
+
+```dotenv
+WAREHOUSE_TOKEN=your-token
+WAREHOUSE_URL=https://cdn.example.com
+```
+
 ## Testing
 
 ```bash
 composer test
 ```
-
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
 ## Contributing
 

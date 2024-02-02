@@ -34,8 +34,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Flowan\\LaravelFilesystemHttp\\": "src/",
-            "Flowan\\LaravelFilesystemHttp\\Database\\Factories\\": "database/factories/"
+            "Flowan\\LaravelFilesystemHttp\\": "src/"
         }
     },
     "autoload-dev": {
@@ -73,10 +72,7 @@
         "laravel": {
             "providers": [
                 "Flowan\\LaravelFilesystemHttp\\LaravelFilesystemHttpServiceProvider"
-            ],
-            "aliases": {
-                "LaravelFilesystemHttp": "Flowan\\LaravelFilesystemHttp\\Facades\\LaravelFilesystemHttp"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",

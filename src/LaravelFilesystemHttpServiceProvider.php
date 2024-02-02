@@ -19,9 +19,7 @@ class LaravelFilesystemHttpServiceProvider extends PackageServiceProvider
          *
          * More info: https://github.com/spatie/laravel-package-tools
          */
-        $package
-            ->name('laravel-filesystem-http')
-            ->hasConfigFile();
+        $package->name('laravel-filesystem-http');
     }
 
     public function packageBooted(): void
