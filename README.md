@@ -32,6 +32,7 @@ return [
             'url' => env('WAREHOUSE_URL'),
             'public_url' => env('WAREHOUSE_PUBLIC_URL', env('WAREHOUSE_URL')),
             'bucket' => env('WAREHOUSE_BUCKET'),
+            'include_bucket_prefix_in_url' => env('WAREHOUSE_INCLUDE_BUCKET_PREFIX_IN_URL', true),
             'include_bucket_in_url' => env('WAREHOUSE_INCLUDE_BUCKET_IN_URL', true),
             'throw' => false,
         ],
