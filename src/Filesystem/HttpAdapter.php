@@ -40,7 +40,8 @@ class HttpAdapter implements FilesystemAdapter
         );
 
         $this->client = Http::withToken($this->config['token'])
-            ->baseUrl($this->config['url'].'/api/');
+            ->baseUrl($this->config['url'].'/api/')
+            ->acceptJson();
 
         if (! empty($this->config['bucket'])) {
             $this->setBucket($this->config['bucket']);
@@ -86,7 +87,7 @@ class HttpAdapter implements FilesystemAdapter
     public function write(string $path, string $contents, Config $config): void
     {
         try {
-            $response = $this->client->post('file', [
+            $response = $this->client->asMultipart()->post('file', [
                 'bucket' => $this->bucket,
                 'path' => $path,
                 'contents' => $contents,
