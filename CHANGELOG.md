@@ -2,6 +2,17 @@
 
 All notable changes to `laravel-filesystem-http` will be documented in this file.
 
+## v0.3.0 - 2024-05-20
+
+### What's Changed
+
+* Support for Laravel 11
+* Bump dependabot/fetch-metadata from 1.6.0 to 2.0.0 by @dependabot in https://github.com/flowan/laravel-filesystem-http/pull/2
+* Bump aglipanci/laravel-pint-action from 2.3.1 to 2.4 by @dependabot in https://github.com/flowan/laravel-filesystem-http/pull/3
+* Bump dependabot/fetch-metadata from 2.0.0 to 2.1.0 by @dependabot in https://github.com/flowan/laravel-filesystem-http/pull/4
+
+**Full Changelog**: https://github.com/flowan/laravel-filesystem-http/compare/v0.2.0...v0.3.0
+
 ## v0.2.0 - 2024-03-11
 
 ### What's Changed
